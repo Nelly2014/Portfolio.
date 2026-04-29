@@ -89,6 +89,29 @@ nav.scrolled{padding:10px 48px;box-shadow:0 4px 32px rgba(0,0,0,.5)}
   background:var(--teal);animation:pulse 2s infinite;
 }
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── CV Download Button ── */
+.btn-cv{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 16px;border-radius:6px;
+  font-family:var(--mono);font-weight:500;font-size:.72rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(212,168,67,.12);
+  color:var(--gold);
+  border:1px solid rgba(212,168,67,.35);
+  cursor:none;
+  transition:background .2s,border-color .2s,transform .15s,box-shadow .15s;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.btn-cv:hover{
+  background:rgba(212,168,67,.22);
+  border-color:var(--gold);
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(212,168,67,.2);
+}
+.btn-cv svg{width:13px;height:13px;flex-shrink:0}
+
 .hamburger{
   display:none;flex-direction:column;justify-content:center;gap:5px;
   width:36px;height:36px;cursor:pointer;
@@ -157,6 +180,19 @@ nav.scrolled{padding:10px 48px;box-shadow:0 4px 32px rgba(0,0,0,.5)}
 }
 .mobile-status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal)}
 
+/* ── MOBILE CV button inside drawer ── */
+.mobile-cv-btn{
+  display:flex;align-items:center;gap:14px;
+  padding:13px 14px;border-radius:10px;
+  text-decoration:none;color:var(--gold);font-size:.95rem;font-weight:500;
+  border:1px solid rgba(212,168,67,.2);
+  background:rgba(212,168,67,.06);
+  transition:all .2s;
+  margin-top:4px;
+}
+.mobile-cv-btn:hover{background:rgba(212,168,67,.14);border-color:rgba(212,168,67,.4)}
+.mobile-cv-btn .m-ico{background:rgba(212,168,67,.12);border-color:rgba(212,168,67,.3)}
+
 /* ── HERO ── */
 #hero{
   position:relative;min-height:100vh;
@@ -216,6 +252,14 @@ nav.scrolled{padding:10px 48px;box-shadow:0 4px 32px rgba(0,0,0,.5)}
 .btn-gold:hover{background:var(--gold2);box-shadow:0 8px 32px rgba(212,168,67,.35)}
 .btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.2)}
 .btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.05)}
+/* hero download cv button */
+.btn-dl{
+  background:transparent;color:var(--gold);
+  border:1px solid rgba(212,168,67,.4);
+  cursor:none;
+}
+.btn-dl:hover{background:rgba(212,168,67,.08);border-color:var(--gold);box-shadow:0 4px 20px rgba(212,168,67,.15)}
+.btn-dl svg{width:16px;height:16px}
 
 /* hero photo */
 .hero-right{
@@ -438,11 +482,70 @@ footer{
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+/* ── CV PRINT STYLES ── */
+@media print{
+  #cv-print-overlay{display:none!important}
+  body{cursor:auto!important;background:#fff!important;color:#111!important}
+  body::before{display:none}
+  #cursor,nav,.scroll-hint,.hero-cta,.proj-link,footer{display:none!important}
+  #hero{min-height:auto;padding:20px 0 24px;grid-template-columns:1fr;display:block}
+  .hero-right,.hero-bg-grid,.hero-glow{display:none!important}
+  .hero-tag{color:#555;font-size:.7rem;margin-bottom:8px}
+  .hero-tag::before{display:none}
+  .hero-name{font-size:2.4rem;color:#111;margin-bottom:4px}
+  .hero-name em{color:#b88a2a}
+  .hero-role{color:#555;font-size:.85rem;margin-bottom:8px}
+  .hero-role span{color:#007a6e}
+  .hero-desc{color:#444;font-size:.88rem;max-width:100%;margin-bottom:0}
+  section{padding:20px 0;page-break-inside:avoid;border:none!important;background:#fff!important}
+  .sec-label{color:#007a6e;font-size:.65rem}
+  .sec-label::after{background:#007a6e}
+  .sec-title{font-size:1.4rem;color:#111}
+  .sec-sub{color:#666;font-size:.85rem;margin-bottom:20px}
+  .about-grid{grid-template-columns:1fr;gap:16px}
+  .stats-grid{grid-template-columns:repeat(4,1fr);gap:8px}
+  .stat-card{background:#f5f5f5;border:1px solid #ddd;padding:12px;border-radius:6px}
+  .stat-num{font-size:1.4rem;color:#b88a2a}
+  .stat-label{font-size:.68rem;color:#666}
+  .about-text p{color:#444;font-size:.88rem;margin-bottom:10px}
+  .skills-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .skill-group{background:#f5f5f5;border:1px solid #ddd;padding:12px;border-radius:6px}
+  .skill-group-title{color:#007a6e;font-size:.65rem;border-bottom-color:#ddd}
+  .tag{background:#eee;border-color:#ccc;color:#333;font-size:.7rem}
+  .timeline::before{background:#b88a2a}
+  .tl-dot{background:#b88a2a}
+  .tl-meta{color:#007a6e;font-size:.7rem}
+  .tl-company{color:#111;font-size:1.1rem}
+  .tl-role{color:#b88a2a;font-size:.75rem}
+  .tl-list li{color:#444;font-size:.82rem}
+  .tl-list li::before{color:#007a6e}
+  .projects-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .proj-card{border:1px solid #ddd;border-radius:6px;background:#f9f9f9}
+  .proj-top{background:#f5f5f5;padding:14px;border-bottom-color:#ddd}
+  .proj-number{color:rgba(184,138,42,.15);font-size:2rem}
+  .proj-icon{font-size:1.2rem;margin-bottom:6px}
+  .proj-title{color:#111;font-size:.95rem;margin-bottom:4px}
+  .proj-desc{color:#555;font-size:.75rem}
+  .proj-bottom{padding:8px 14px}
+  .proj-stack .tag{font-size:.65rem;padding:2px 7px}
+  .edu-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .edu-card{background:#f5f5f5;border:1px solid #ddd;padding:16px;border-radius:6px}
+  .edu-year{color:#b88a2a;font-size:.7rem}
+  .edu-degree{color:#111;font-size:.95rem}
+  .edu-school{color:#666;font-size:.82rem}
+  #contact .contact-card{background:#f5f5f5;border:1px solid #ddd;padding:24px;border-radius:8px;max-width:100%}
+  .contact-row{background:#eee;border-color:#ddd;color:#111;padding:10px 14px}
+  .contact-ico{background:#e0f5f2;border-color:#b0ddd7}
+  .contact-val{color:#555;font-size:.75rem}
+  .reveal{opacity:1!important;transform:none!important}
+}
+
 /* ── MOBILE ── */
 @media(max-width:768px){
   nav{padding:12px 20px}
   .nav-links{display:none}
   .nav-tag{display:none}
+  .btn-cv{display:none}
   .hamburger{display:flex}
   #hero{grid-template-columns:1fr;padding:100px 20px 60px;text-align:center}
   .hero-right{display:none}
@@ -480,10 +583,15 @@ footer{
     <a href="#projects"   class="mob-link"><span class="m-ico">🚀</span><span class="m-label">Projects</span><span class="m-arrow">→</span></a>
     <a href="#education"  class="mob-link"><span class="m-ico">🎓</span><span class="m-label">Education</span><span class="m-arrow">→</span></a>
     <a href="#contact"    class="mob-link"><span class="m-ico">✉</span><span class="m-label">Contact</span><span class="m-arrow">→</span></a>
+    <button class="mobile-cv-btn" onclick="downloadCV();document.getElementById('mobileMenu').classList.remove('open');document.getElementById('menuOverlay').classList.remove('open');document.body.style.overflow=''">
+      <span class="m-ico">📄</span>
+      <span class="m-label">Download CV</span>
+      <span class="m-arrow">↓</span>
+    </button>
   </nav>
   <div class="mobile-menu-footer">
     <strong>Neliswa Sililo</strong>
-    ICT Intern &amp; Full-Stack Developer<br/>
+    Application Developer · IT Support Professional<br/>
     <a href="mailto:neliswasililo2@gmail.com">neliswasililo2@gmail.com</a>
     <div class="mobile-status">Available for hire</div>
   </div>
@@ -502,6 +610,12 @@ footer{
   </ul>
   <div class="nav-right">
     <span class="nav-tag">Available for hire</span>
+    <button class="btn-cv" onclick="downloadCV()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 15V3M12 15l-4-4M12 15l4-4M3 19h18"/>
+      </svg>
+      Download CV
+    </button>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -517,7 +631,7 @@ footer{
     <div class="hero-tag">IT Professional · Eastern Cape, ZA</div>
     <h1 class="hero-name">Neliswa<br/><em>Sililo</em></h1>
     <div class="hero-role">
-      ICT Intern &amp; <span>Full-Stack Developer</span>
+      Application Developer · <span>IT Support Professional</span>
     </div>
     <p class="hero-desc">
       Motivated IT graduate with hands-on experience in technical support, web development,
@@ -527,6 +641,12 @@ footer{
     <div class="hero-cta">
       <a href="#projects" class="btn btn-gold">View My Work</a>
       <a href="mailto:neliswasililo2@gmail.com" class="btn btn-outline">Get In Touch</a>
+      <button class="btn btn-dl" onclick="downloadCV()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 15V3M12 15l-4-4M12 15l4-4M3 19h18"/>
+        </svg>
+        Download CV
+      </button>
     </div>
   </div>
 
@@ -695,8 +815,8 @@ footer{
         <div class="proj-stack">
           <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span>
         </div>
-        <a href="https://nelly2014.github.io/Final-Project/" target="_blank" class="proj-link">
-          Live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        <a href="https://github.com/nelly2014/Final-Project" target="_blank" class="proj-link">
+          GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
         </a>
       </div>
     </div>
@@ -853,6 +973,19 @@ footer{
         </div>
         <span class="contact-val">View code →</span>
       </a>
+      <!-- CV download row -->
+      <button onclick="downloadCV()" class="contact-row" style="background:rgba(212,168,67,.06);border-color:rgba(212,168,67,.25);text-align:left;width:100%;cursor:none;">
+        <div class="contact-ico" style="background:rgba(212,168,67,.12);border-color:rgba(212,168,67,.3)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4a843" stroke-width="2">
+            <path d="M12 15V3M12 15l-4-4M12 15l4-4M3 19h18"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight:600;font-size:.88rem;color:#d4a843">Download CV</div>
+          <div style="color:var(--muted);font-size:.8rem">Print-ready PDF version</div>
+        </div>
+        <span class="contact-val" style="color:#d4a843">Save PDF →</span>
+      </button>
     </div>
   </div>
 </section>
@@ -864,6 +997,16 @@ footer{
 </footer>
 
 <script>
+/* ── CV Download ── */
+function downloadCV(){
+  // Set document title temporarily so the saved PDF has a good filename
+  const prevTitle = document.title;
+  document.title = 'Neliswa_Sililo_CV_2026';
+  window.print();
+  // Restore title after the print dialog closes
+  setTimeout(()=>{ document.title = prevTitle; }, 1000);
+}
+
 /* cursor */
 const cur=document.getElementById('cursor');
 document.addEventListener('mousemove',e=>{
@@ -901,9 +1044,7 @@ function setActive(id){
 }
 
 window.addEventListener('scroll',()=>{
-  /* shrink nav */
   mainNav.classList.toggle('scrolled',window.scrollY>60);
-  /* active section */
   let current='';
   sections.forEach(s=>{
     if(window.scrollY>=s.offsetTop-140) current=s.id;
@@ -935,13 +1076,7 @@ hamburger.addEventListener('click',()=>{
 });
 menuClose.addEventListener('click',closeMenu);
 menuOverlay.addEventListener('click',closeMenu);
-
-/* close drawer when a mobile nav link is clicked */
-mobLinks.forEach(a=>{
-  a.addEventListener('click',closeMenu);
-});
-
-/* keyboard escape */
+mobLinks.forEach(a=>{ a.addEventListener('click',closeMenu); });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
 
 /* hero animate on load */
